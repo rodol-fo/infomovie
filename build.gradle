@@ -1,0 +1,31 @@
+group 'fo.rodol'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+jar {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    manifest {
+        attributes 'Main-Class': 'fo.rodol.infomovie.InfoMovie'
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile 'org.springframework:spring-web:4.2.3.RELEASE'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.2'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.2'
+    compile 'commons-cli:commons-cli:1.3.1'
+
+    testCompile 'org.codehaus.groovy:groovy-all'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'org.springframework:spring-test:4.2.3.RELEASE'
+}
